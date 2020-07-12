@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Trail.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.235294, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.0784314, 1, 1, 1, 0.67451 )
+
+[node name="Trail" type="Line2D"]
+z_index = -1
+width = 56.0
+width_curve = SubResource( 2 )
+gradient = SubResource( 1 )
+script = ExtResource( 1 )

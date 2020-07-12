@@ -1,0 +1,219 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://CoinSpawner.gd" type="Script" id=2]
+[ext_resource path="res://MimicSpawner.gd" type="Script" id=3]
+[ext_resource path="res://bg-loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://InputSerifNarrow-Light.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://ScoreLabel.gd" type="Script" id=8]
+[ext_resource path="res://triangle.png" type="Texture" id=9]
+[ext_resource path="res://AssistSpawner.gd" type="Script" id=11]
+[ext_resource path="res://circle.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 718.026, 112.728 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 157.722, 383.492 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 26
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 7 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Boundaries" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 616.787, -113.29 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 616.787, 832.17 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( 1438.28, 351.155 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2( -158.455, 351.155 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CoinSpawner" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="CoinSpawnTimer" type="Timer" parent="CoinSpawner"]
+wait_time = 4.0
+
+[node name="MimicSpawner" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="ActiveMimics" type="Node" parent="MimicSpawner"]
+
+[node name="UnactiveMimics" type="Node" parent="MimicSpawner"]
+
+[node name="ScoreLabel" type="Label" parent="."]
+visible = false
+margin_left = 23.4793
+margin_top = 18.5759
+margin_right = 143.479
+margin_bottom = 67.5759
+custom_fonts/font = SubResource( 3 )
+text = "0"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AssistSpawner" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="AssistSpawnTimer" type="Timer" parent="AssistSpawner"]
+wait_time = 15.0
+
+[node name="IntroUI" type="Node2D" parent="."]
+
+[node name="Instructions" type="Label" parent="IntroUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 124.0
+margin_top = 137.527
+margin_right = 1154.0
+margin_bottom = 494.527
+custom_fonts/font = SubResource( 6 )
+text = "Collect as many    as you can without hitting the edge of the screen! Steer using A/D or the left/right arrow keys.
+
+Every time you collect   , Mimics of your body      will spawn and spread out in all directions. Your direction will change too, so you need to quickly figure out which one is your real body before you hit the edge of the screen!
+
+    will temporarily reveal your body. Things will get out of control fast, so you'll need them. Trust me."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="body" type="ColorRect" parent="IntroUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 893.134
+margin_top = 229.988
+margin_right = 933.134
+margin_bottom = 269.988
+rect_rotation = 45.0
+rect_pivot_offset = Vector2( 20, 20 )
+color = Color( 0, 0.647059, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="coin" type="Sprite" parent="IntroUI"]
+modulate = Color( 0.32549, 0.854902, 0.294118, 1 )
+position = Vector2( 404.081, 153.425 )
+scale = Vector2( 0.228, 0.228 )
+texture = ExtResource( 12 )
+
+[node name="coin2" type="Sprite" parent="IntroUI"]
+modulate = Color( 0.32549, 0.854902, 0.294118, 1 )
+position = Vector2( 510.996, 260.597 )
+scale = Vector2( 0.228, 0.228 )
+texture = ExtResource( 12 )
+
+[node name="assist" type="Sprite" parent="IntroUI"]
+modulate = Color( 1, 0.486275, 0, 1 )
+position = Vector2( 148.49, 438.832 )
+scale = Vector2( 0.5304, 0.5304 )
+texture = ExtResource( 9 )
+
+[node name="PlayButton" type="Button" parent="IntroUI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 559.0
+margin_top = 550.771
+margin_right = 721.0
+margin_bottom = 627.771
+custom_fonts/font = SubResource( 5 )
+text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoseUI" type="Node2D" parent="."]
+visible = false
+
+[node name="Text" type="Label" parent="LoseUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 127.951
+margin_top = 214.017
+margin_right = 1157.95
+margin_bottom = 392.017
+custom_fonts/font = SubResource( 4 )
+text = "Cool, you got 99 points!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgainButton" type="Button" parent="LoseUI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 469.664
+margin_top = 373.097
+margin_right = 795.664
+margin_bottom = 450.097
+custom_fonts/font = SubResource( 5 )
+text = "PLAY AGAIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -9.0
+autoplay = true
+[connection signal="timeout" from="CoinSpawner/CoinSpawnTimer" to="CoinSpawner" method="_on_CoinSpawnTimer_timeout"]
+[connection signal="timeout" from="AssistSpawner/AssistSpawnTimer" to="AssistSpawner" method="_on_AssistSpawnTimer_timeout"]
+[connection signal="pressed" from="IntroUI/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="LoseUI/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
