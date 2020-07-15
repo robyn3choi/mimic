@@ -16,9 +16,8 @@ func spawn_assist():
 	var y = rng.randi_range(edge_buffer, screen_size.y-edge_buffer)
 	assist.position = Vector2(x, y)
 	
-	assist.connect("got_assist", $'../Player', "assist")
+	assist.connect("got_assist", Game.player, "assist")
 	add_child(assist)
-
 
 
 func _on_AssistSpawnTimer_timeout() -> void:

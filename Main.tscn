@@ -1,14 +1,18 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://CoinSpawner.gd" type="Script" id=2]
 [ext_resource path="res://MimicSpawner.gd" type="Script" id=3]
-[ext_resource path="res://bg-loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/time to decide.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/FX ELECTRO.WAV" type="AudioStream" id=5]
+[ext_resource path="res://audio/001.wav" type="AudioStream" id=6]
 [ext_resource path="res://InputSerifNarrow-Light.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://ScoreLabel.gd" type="Script" id=8]
 [ext_resource path="res://triangle.png" type="Texture" id=9]
+[ext_resource path="res://GameTimerLabel.gd" type="Script" id=10]
 [ext_resource path="res://AssistSpawner.gd" type="Script" id=11]
 [ext_resource path="res://circle.png" type="Texture" id=12]
+[ext_resource path="res://audio/FX DONK.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 718.026, 112.728 )
@@ -18,18 +22,32 @@ extents = Vector2( 157.722, 383.492 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 26
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 40
+outline_size = 1
+outline_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 80
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 26
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+outline_size = 1
+outline_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+outline_size = 1
+outline_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
 font_data = ExtResource( 7 )
 
 [node name="Main" type="Node"]
@@ -84,11 +102,10 @@ script = ExtResource( 3 )
 [node name="UnactiveMimics" type="Node" parent="MimicSpawner"]
 
 [node name="ScoreLabel" type="Label" parent="."]
-visible = false
-margin_left = 23.4793
-margin_top = 18.5759
-margin_right = 143.479
-margin_bottom = 67.5759
+margin_left = 14.8134
+margin_top = 0.456255
+margin_right = 134.813
+margin_bottom = 49.4563
 custom_fonts/font = SubResource( 3 )
 text = "0"
 script = ExtResource( 8 )
@@ -100,9 +117,22 @@ __meta__ = {
 script = ExtResource( 11 )
 
 [node name="AssistSpawnTimer" type="Timer" parent="AssistSpawner"]
-wait_time = 15.0
+wait_time = 10.0
 
 [node name="IntroUI" type="Node2D" parent="."]
+
+[node name="Title" type="Label" parent="IntroUI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 489.518
+margin_top = 56.4062
+margin_right = 787.518
+margin_bottom = 153.406
+custom_fonts/font = SubResource( 4 )
+text = "MIMIC"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Instructions" type="Label" parent="IntroUI"]
 anchor_left = 0.5
@@ -110,15 +140,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 124.0
-margin_top = 137.527
+margin_top = 169.115
 margin_right = 1154.0
-margin_bottom = 494.527
-custom_fonts/font = SubResource( 6 )
+margin_bottom = 562.115
+custom_fonts/font = SubResource( 5 )
 text = "Collect as many    as you can without hitting the edge of the screen! Steer using A/D or the left/right arrow keys.
 
 Every time you collect   , Mimics of your body      will spawn and spread out in all directions. Your direction will change too, so you need to quickly figure out which one is your real body before you hit the edge of the screen!
 
-    will temporarily reveal your body. Things will get out of control fast, so you'll need them. Trust me."
+    will temporarily reveal your body.
+	Things will get OUT OF CONTROL fast, so you'll need them. Trust me."
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -130,9 +161,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 893.134
-margin_top = 229.988
+margin_top = 259.319
 margin_right = 933.134
-margin_bottom = 269.988
+margin_bottom = 299.319
 rect_rotation = 45.0
 rect_pivot_offset = Vector2( 20, 20 )
 color = Color( 0, 0.647059, 1, 1 )
@@ -142,19 +173,19 @@ __meta__ = {
 
 [node name="coin" type="Sprite" parent="IntroUI"]
 modulate = Color( 0.32549, 0.854902, 0.294118, 1 )
-position = Vector2( 404.081, 153.425 )
+position = Vector2( 404.081, 182.756 )
 scale = Vector2( 0.228, 0.228 )
 texture = ExtResource( 12 )
 
 [node name="coin2" type="Sprite" parent="IntroUI"]
 modulate = Color( 0.32549, 0.854902, 0.294118, 1 )
-position = Vector2( 510.996, 260.597 )
+position = Vector2( 510.996, 289.928 )
 scale = Vector2( 0.228, 0.228 )
 texture = ExtResource( 12 )
 
 [node name="assist" type="Sprite" parent="IntroUI"]
 modulate = Color( 1, 0.486275, 0, 1 )
-position = Vector2( 148.49, 438.832 )
+position = Vector2( 148.49, 468.163 )
 scale = Vector2( 0.5304, 0.5304 )
 texture = ExtResource( 9 )
 
@@ -164,10 +195,10 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 559.0
-margin_top = 550.771
+margin_top = 576.718
 margin_right = 721.0
-margin_bottom = 627.771
-custom_fonts/font = SubResource( 5 )
+margin_bottom = 653.718
+custom_fonts/font = SubResource( 6 )
 text = "PLAY"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -185,7 +216,7 @@ margin_left = 127.951
 margin_top = 214.017
 margin_right = 1157.95
 margin_bottom = 392.017
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "Cool, you got 99 points!"
 align = 1
 valign = 1
@@ -203,17 +234,44 @@ margin_left = 469.664
 margin_top = 373.097
 margin_right = 795.664
 margin_bottom = 450.097
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "PLAY AGAIN"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -9.0
 autoplay = true
+
+[node name="CoinAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="LoseAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -6.001
+
+[node name="GameTimerLabel" type="Label" parent="."]
+margin_left = 574.687
+margin_top = 2.36342
+margin_right = 679.687
+margin_bottom = 51.3634
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTimer" type="Timer" parent="GameTimerLabel"]
+
+[node name="RedAudio" type="AudioStreamPlayer" parent="GameTimerLabel"]
+stream = ExtResource( 13 )
+volume_db = -13.333
 [connection signal="timeout" from="CoinSpawner/CoinSpawnTimer" to="CoinSpawner" method="_on_CoinSpawnTimer_timeout"]
 [connection signal="timeout" from="AssistSpawner/AssistSpawnTimer" to="AssistSpawner" method="_on_AssistSpawnTimer_timeout"]
 [connection signal="pressed" from="IntroUI/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="LoseUI/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="timeout" from="GameTimerLabel/GameTimer" to="GameTimerLabel" method="_on_GameTimer_timeout"]

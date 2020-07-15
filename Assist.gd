@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 
 func _on_Assist_body_entered(body) -> void:
 	if body.get_parent().name == "Player":
+		$AssistAudio.play()
 		emit_signal('got_assist')
 		$Sprite.hide()
 		$Pulse.hide()

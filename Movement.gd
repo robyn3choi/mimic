@@ -56,10 +56,6 @@ func _on_BlinkTimer_timeout() -> void:
 		hide()
 	else:
 		show()
-
-
-func _on_AssistTimer_timeout() -> void:
-	toggle_color()
 	
 	
 func toggle_color():
@@ -69,3 +65,10 @@ func toggle_color():
 		$ColorRect.color = assist_color
 	
 	is_assist_color = !is_assist_color
+	
+
+func be_assist_color():
+	$ColorRect.color = assist_color
+	
+func be_default_color():
+	$ColorRect.color = default_color

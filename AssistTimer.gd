@@ -1,22 +1,34 @@
 extends Timer
 
-var assist_duration = 4
+var num_assist_ticks = 8
 var blink_duration = 0.5
-var num_assist_blinks = 4
 var num_times_blinked = 0
+var num_ticks_before_blinking = 3
+var tick_counter = 0
 
 func start_timer():
-	print("assist timer start")
 	num_times_blinked = 0
-	wait_time = assist_duration
+	tick_counter = 1
+	$TickAudio.play()
 	start()
 
 
 func _on_AssistTimer_timeout() -> void:
-	if num_times_blinked == 0:
-		wait_time = blink_duration
-		start()
-	elif num_times_blinked < num_assist_blinks:
-		start()
+	if tick_counter % 2 == 0:
+		$TickAudio.play()
+	else:
+		$TockAudio.play()
 		
-	num_times_blinked += 1
+	tick_counter += 1
+		
+	if tick_counter >= num_ticks_before_blinking:
+		$'../Movement'.toggle_color()
+		
+	if (tick_counter >= num_assist_ticks):
+		stop()
+		$'../Movement'.be_default_color()
+		return
+	
+	start()
+	
+	

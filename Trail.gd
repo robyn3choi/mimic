@@ -2,10 +2,10 @@ extends Line2D
 
 var target
 var point
-var trail_length = 80
+var trail_length = 20
 var is_enabled = true
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if (is_enabled):
 		point = $'../Movement'.get_position()
 		add_point(point)

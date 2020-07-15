@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 
 func _on_Coin_body_entered(body: Node) -> void:
 	if body.get_parent().name == "Player":
+		$CoinAudio.play()
 		Game.add_point()
 		emit_signal('got_coin')
 		$Sprite.hide()

@@ -7,11 +7,14 @@ func start_game():
 	var player = player_scene.instance()
 	player.set_position(player_start_pos)
 	player.connect('player_died', self, 'lose')
-	add_child(player)
+	$MimicSpawner/ActiveMimics.add_child(player)
+	Game.player = player
+	
 	$IntroUI.hide()
 	$CoinSpawner/CoinSpawnTimer.start()
 	$AssistSpawner/AssistSpawnTimer.start()
 	$ScoreLabel.show()
+	$GameTimerLabel.start()
 	$CoinSpawner.spawn_coin()
 	$Boundaries.connect('body_entered', player, 'lose')
 
@@ -21,7 +24,10 @@ func _on_PlayButton_pressed() -> void:
 
 
 func lose():
+	$LoseAudio.play()
 	$CoinSpawner/CoinSpawnTimer.stop()
+	$MimicSpawner.stop()
+	Game.player.stop()
 	if Game.score == 1:
 		$LoseUI/Text.text = "Darn, you only got 1 point!"
 	else:
@@ -30,4 +36,5 @@ func lose():
 
 
 func _on_PlayAgainButton_pressed() -> void:
+	Game.score = 0
 	get_tree().reload_current_scene()

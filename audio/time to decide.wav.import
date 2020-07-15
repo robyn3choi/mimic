@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/time to decide.wav-1e2d97bee8e387560c49c3c4fcf7a0e6.sample"
+
+[deps]
+
+source_file="res://audio/time to decide.wav"
+dest_files=[ "res://.import/time to decide.wav-1e2d97bee8e387560c49c3c4fcf7a0e6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

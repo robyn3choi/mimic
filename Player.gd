@@ -31,10 +31,13 @@ func set_rotation(rot):
 func lose(body: Node) -> void:
 	if body.get_parent() == self:
 		emit_signal('player_died')
-		$Movement.stop()
-		$BlinkTimer.start()
+		stop()
 		
 		
 func assist():
-	$Movement.toggle_color()
+	$Movement.be_assist_color()
 	$AssistTimer.start_timer()
+	
+func stop():
+	$Movement.stop()
+	$BlinkTimer.start()
